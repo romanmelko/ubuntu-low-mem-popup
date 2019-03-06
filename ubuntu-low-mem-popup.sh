@@ -16,7 +16,7 @@ sleep 60
 
 while :
 do
-    available=$(free -m | awk '/^Mem:/{print $7}')
+    available=$(free -mw | awk '/^Mem:/{print $8}')
     if [ $available -lt $THRESHOLD ]; then
         title="Low memory! $available MB available"
         message=$(top -bo %MEM -n 1 | grep -A 3 PID | awk '{print $(NF - 6) " \t" $(NF)}')
@@ -24,7 +24,7 @@ do
         kdialog --title "$title" --passivepopup "$message" $POPUP_DELAY
         # use the following command if you are not using KDE Plasma, comment the line above and uncomment the line below
         # please note that timeout for notify-send is represented in milliseconds
-        # notify-send "$title" "$message" -t $POPUP_DELAY
+        # notify-send -u critical "$title" "$message" -t $POPUP_DELAY
     fi
     sleep $INTERVAL
 done
