@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
+
 set -o errexit
 set -o pipefail
 set -o nounset
+
+# If the language is not English, free will output localized text and parsing fails
+LANG=en_US.UTF-8
 
 THRESHOLD=500
 INTERVAL=300
