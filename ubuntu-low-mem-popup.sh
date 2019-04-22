@@ -20,11 +20,11 @@ do
     if [ $available -lt $THRESHOLD ]; then
         title="Low memory! $available MB available"
         message=$(top -bo %MEM -n 1 | grep -A 3 PID | awk '{print $(NF - 6) " \t" $(NF)}')
-	    if [ -x "$(command -v kdialog)" ]; then # assume KDE Plasma is installed and is active
+    	if [ -x "$(command -v kdialog)" ]; then # assume KDE Plasma is installed and is active
             kdialog --title "$title" --passivepopup "$message" $POPUP_DELAY
         else
             notify-send -u critical "$title" "$message" -t $POPUP_DELAY
-	    fi
+	fi
     fi
     sleep $INTERVAL
 done
